@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from mailerpy import Mailer
 st.title('Bank Account Opening Form')
 
 st.header('Account Details')
@@ -23,7 +24,18 @@ terms = st.checkbox('I agree to the terms and conditions.')
 submit = st.button(label='Submit')
 
 if submit:
-    st.text('Form submitted successfully.✅')
+    st.text('Form submitted successfully.✅\nA confirmation mail has been sent to your gmail account!')
+
+    password = 'chjx ofgn ueec uqjz'
+    mailer = Mailer('smtp.gmail.com',587,'aadritthapa01@gmail.com',password)
+
+    receiver = [email]
+
+    subject = 'Confirmation mail for form submission.'
+
+    body = f'Dear {fN},\nYou have successfully registered for a {accType} account.'
+
+    mailer.send_mail(receiver,subject,body)
 
     st.subheader('Your Data')
     df = st.dataframe({
